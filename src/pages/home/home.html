@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+<ion-list>
+	<ion-item>
+		<ion-label floating>Player 1</ion-label>
+		<ion-input type="text" [(ngModel)]="players.player1"></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label floating>Player 2</ion-label>
+		<ion-input type="text" [(ngModel)]="players.player2"></ion-input>
+	</ion-item>
+</ion-list>
+<button class="hej" ion-button block type="submit" (click)="selectNames()">Play</button>
+
+</ion-content>
