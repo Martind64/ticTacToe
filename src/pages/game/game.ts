@@ -21,7 +21,6 @@ export class GamePage {
   public player2 = new Player(this.player2Name, 'O');
   public board = new Board();
   public winner:string;
-
   public playerTurn = true;
 
 
