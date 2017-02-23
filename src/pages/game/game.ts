@@ -15,28 +15,28 @@ export class GamePage {
   			}
 
   // Get player information from navParams
-  public player1Name = this.navParams.get('player1');
-  public player2Name = this.navParams.get('player2');
-  public player1Icon = this.navParams.get('player1Icon');
-  public player2Icon = this.navParams.get('player2Icon');
+  private player1Name = this.navParams.get('player1');
+  private player2Name = this.navParams.get('player2');
+  private player1Icon = this.navParams.get('player1Icon');
+  private player2Icon = this.navParams.get('player2Icon');
 
 
   // Create new Player Objects
-  public player1 = new Player(this.player1Name, this.player1Icon);
-  public player2 = new Player(this.player2Name, this.player2Icon);
+  private player1 = new Player(this.player1Name, this.player1Icon);
+  private player2 = new Player(this.player2Name, this.player2Icon);
 
   // Create new Board object
-  public board = new Board();
+  private board = new Board();
 
   // Variables for the game
-  public winner:string;
-  public playerTurn = true;
+  private winner:string;
+  private playerTurn = true;
 
   //Used for determining a draw
-  public numOfTurns = 8;
-  public turnsTaken = 0;
+  private numOfTurns = 9;
+  private turnsTaken = 0;
 
-  setPiece(x, y)
+  setPiece(x:number, y:number)
   {
     // Checks if a board position has been taken
     if(this.board.board[x][y] == this.player1.sign || this.board.board[x][y] == this.player2.sign)
@@ -54,8 +54,11 @@ export class GamePage {
   		this.playerTurn = true;
   	}
     this.checkWin();
-    this.checkForDraw();
+
     this.turnsTaken++;
+    this.checkForDraw();
+    console.log(this.turnsTaken);
+
   }
 
   // Checks for a draw
@@ -176,6 +179,7 @@ export class GamePage {
   {
      this.board.board = [['', '', ''], ['', '', ''], ['', '', '']];
      this.playerTurn = true;
+     this.winner = null;
      this.turnsTaken = 0;
   }
 
