@@ -18,6 +18,26 @@
 		<ion-input type="text" [(ngModel)]="players.player2"></ion-input>
 	</ion-item>
 </ion-list>
-<button class="hej" ion-button block type="submit" (click)="selectNames()">Play</button>
+
+<ion-grid>
+	<ion-row>
+		<ion-col width-50>Player 1</ion-col>
+		<ion-col width-50>Player 2</ion-col>
+	</ion-row>
+	<ion-row>
+		<ion-col width-40>
+		<input type="text" hidden [(ngModel)]="players.player1Icon">
+			<p style="display:inline">{{players.player1Icon}}</p>
+		</ion-col>
+		<ion-col width-10>
+			<ion-icon name="swap" (click)="changeIcon()"></ion-icon>
+		</ion-col>
+		<ion-col width-40>
+			<p style="display:inline">{{players.player2Icon}}</p>
+		</ion-col>
+	</ion-row>
+</ion-grid>
+<br>
+<button class="hej" ion-button block type="submit" (click)="selectPlayers()">Play</button>
 
 </ion-content>

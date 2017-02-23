@@ -35,13 +35,13 @@
 	<ion-row>
 		<ion-col width-50><p ion-text [color]="playerTurn ? 'secondary' : ''">{{player1?.name}}</p></ion-col>
 		<p class="vs">VS</p>
-		<ion-col width-50><p ion-text [color]="playerTurn ? '' : 'secondary'">{{player2?.name}}</p></ion-col>
+		<ion-col width-50 ><p ion-text [color]="playerTurn ? '' : 'secondary'">{{player2?.name}}</p></ion-col>
 	</ion-row>
 </ion-grid>
 
 <ion-row>
 	<ion-col width-50>
-		<button ion-button (click)="clearGame()">Clear game</button>
+		<button ion-button (click)="clearGame()">Clear board</button>
 	</ion-col>
 </ion-row>
 

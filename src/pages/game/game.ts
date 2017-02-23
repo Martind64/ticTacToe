@@ -12,13 +12,16 @@ import { Player } from '../../models/Player';
 export class GamePage {
 
 	constructor(public navCtrl: NavController, public alertCtrl: AlertController, public navParams: NavParams) {
+      console.log(this.navParams.get('player1Icon'));
   			}
 
   public player1Name = this.navParams.get('player1');
   public player2Name = this.navParams.get('player2');
+  public player1Icon = this.navParams.get('player1Icon');
+  public player2Icon = this.navParams.get('player2Icon');
 
-  public player1 = new Player(this.player1Name, 'X');
-  public player2 = new Player(this.player2Name, 'O');
+  public player1 = new Player(this.player1Name, this.player1Icon);
+  public player2 = new Player(this.player2Name, this.player2Icon);
   public board = new Board();
   public winner:string;
   public playerTurn = true;
