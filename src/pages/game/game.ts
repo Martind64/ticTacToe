@@ -23,14 +23,19 @@ export class GamePage {
   public winner:string;
   public playerTurn = true;
 
+  //Used for determining a draw
+  public numOfTurns = 8;
+  public turnsTaken = 0;
 
   setPiece(x, y)
   {
+    // Checks if a board position has been taken
     if(this.board.board[x][y] == this.player1.sign || this.board.board[x][y] == this.player2.sign)
     {
-      console.log("sign is taken");
+      return;
     }
-    else if(this.playerTurn == true) {
+    
+    if(this.playerTurn == true) {
   		this.board.board[x][y] = this.player1.sign;
   		this.playerTurn = false;
   	}
@@ -40,8 +45,18 @@ export class GamePage {
   		this.playerTurn = true;
   	}
     this.checkWin();
+    this.checkForDraw();
+    console.log(this.turnsTaken);
+    this.turnsTaken++;
   }
 
+  // Checks for a draw
+  checkForDraw()
+  {
+    if(this.turnsTaken == this.numOfTurns && this.winner == null) {
+      this.alertAtDraw();
+    }
+  }
   checkWin()
   {
     // Check first row
@@ -119,6 +134,7 @@ export class GamePage {
       }
     }
   }
+
   }
 
   alertAtWin()
@@ -135,6 +151,19 @@ export class GamePage {
     alert.present();
   }
 
+  alertAtDraw()
+  {    
+    let alert = this.alertCtrl.create({
+      title: "Game over",
+      subTitle: "Sorry guys, it's a draw!",
+      buttons: [{
+        text: 'OK'
+      }
+      ]
+    });
+    alert.present();
+  }
+
   newNames()
   {
     this.navCtrl.setRoot(HomePage);
@@ -144,6 +173,7 @@ export class GamePage {
   {
      this.board.board = [['', '', ''], ['', '', ''], ['', '', '']];
      this.playerTurn = true;
+     this.turnsTaken = 0;
   }
 
 }

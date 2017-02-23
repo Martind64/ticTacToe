@@ -33,9 +33,9 @@
 
 <ion-grid class="names">
 	<ion-row>
-		<ion-col width-50><p [color]="playerTurn ? 'secondary' : ''">{{player1?.name}}</p></ion-col>
+		<ion-col width-50><p ion-text [color]="playerTurn ? 'secondary' : ''">{{player1?.name}}</p></ion-col>
 		<p class="vs">VS</p>
-		<ion-col width-50><p [color]="playerTurn ? '' : 'secondary'">{{player2?.name}}</p></ion-col>
+		<ion-col width-50><p ion-text [color]="playerTurn ? '' : 'secondary'">{{player2?.name}}</p></ion-col>
 	</ion-row>
 </ion-grid>
 
