@@ -19,7 +19,6 @@ export class GamePage {
   private player1Sign = this.navParams.get('player1Sign');
   private player2Sign = this.navParams.get('player2Sign');
 
-
   // Create new Player Objects
   private player1 = new Player(this.player1Name, this.player1Sign);
   private player2 = new Player(this.player2Name, this.player2Sign);
@@ -32,6 +31,10 @@ export class GamePage {
   private playerTurn = true;
   private player1Turn = true;
   private player2Turn = false;
+  private deleteHasOccured = false;
+
+  // To dertimine at what turn a sign was put down
+  private pos:{ pos:string }[] = [];
 
   //Used for determining a draw
   private numOfTurns = 9;
@@ -39,12 +42,13 @@ export class GamePage {
 
   setPiece(x:number, y:number)
   {
-    // Checks if a board position has been taken
-    if(this.board.board[x][y] == this.player1.sign || this.board.board[x][y] == this.player2.sign)
+    if(this.board.board[x][y] != "")
     {
       return;
     }
-    
+    this.setPosToTurn(x, y);
+    console.log(this.pos['pos0']);
+
     if(this.playerTurn == this.player1Turn) {
   		this.board.board[x][y] = this.player1.sign;
   		this.playerTurn = this.player2Turn;
@@ -54,15 +58,111 @@ export class GamePage {
   		this.board.board[x][y] = this.player2.sign;
   		this.playerTurn = this.player1Turn;
   	}
-    this.checkWin();
 
+    this.deleteHasOccured = false;
+    this.checkWin();
     this.turnsTaken++;
     this.checkForDraw();
   }
 
-  movePiece(x:number, y:number)
+  setPosToTurn(x:number, y:number)
   {
-    if(this.board.board[x][y] != "") {
+    if(x == 0 && y == 0) {
+      this.pos['pos0'] = this.turnsTaken;
+    }
+    else if(x == 0 && y == 1){
+      this.pos['pos1'] = this.turnsTaken;
+    }
+    else if(x == 0 && y == 2){
+      this.pos['pos2'] = this.turnsTaken;
+    }
+    else if(x == 1 && y == 0){
+      this.pos['pos3'] = this.turnsTaken;
+    }
+    else if(x == 1 && y == 1){
+      this.pos['pos4'] = this.turnsTaken;
+    }
+    else if(x == 1 && y == 2){
+      this.pos['pos5'] = this.turnsTaken;
+    }
+    else if(x == 2 && y == 0){
+      this.pos['pos6'] = this.turnsTaken;
+    }
+    else if(x == 2 && y == 1){
+       this.pos['pos7'] = this.turnsTaken;
+    }
+    else if(x == 2 && y == 2){
+      this.pos['pos8'] = this.turnsTaken;
+    }
+  }
+
+  movePiece(x:number, y:number, posNo:number)
+  {
+    // If the position is not filled end the function
+    if(this.board.board[x][y] == "") {
+      return;
+    }
+    // If a delete already has been done show d and end function
+    if(this.deleteHasOccured == true) {
+      this.alertHasDeleted();
+      return;
+    }
+
+    var turnsTaken = this.turnsTaken -1;
+    switch (posNo) {
+      case 0:
+        if(this.pos['pos0'] == turnsTaken) {
+          this.deletePiece(x, y);
+        }
+      break;
+      case 1:
+        if(this.pos['pos1'] == turnsTaken) {
+          this.deletePiece(x, y);            
+          }  
+      break;
+      case 2:
+        if(this.pos['pos2'] == turnsTaken) {
+          this.deletePiece(x, y);            
+         } 
+      break;
+      case 3:
+        if(this.pos['pos3'] == turnsTaken) {
+          this.deletePiece(x, y);
+        }
+      break;
+      case 4:
+        if(this.pos['pos4'] == turnsTaken) {
+          this.deletePiece(x, y);
+        }
+      break;
+      case 5:
+        if(this.pos['pos5'] == turnsTaken) {
+          this.deletePiece(x, y);
+        }
+      break;
+      case 6:
+        if(this.pos['pos6'] == turnsTaken) {
+          this.deletePiece(x, y);
+        }
+      break;
+      case 7:
+        if(this.pos['pos7'] == turnsTaken) {
+          this.deletePiece(x, y);
+        }
+      break;
+      case 8:
+        if(this.pos['pos8'] == turnsTaken) {
+          this.deletePiece(x, y);
+        }
+      break;
+      default:
+        console.log("Could move the piece!")
+        break;
+    }
+  }
+
+  deletePiece(x:number, y:number)
+  {
 
       if(this.board.board[x][y] == this.player1Sign) {
         this.playerTurn = this.player1Turn;
@@ -73,7 +173,7 @@ export class GamePage {
       this.board.board[x][y] = "";
 
       this.turnsTaken -=1;
-    }
+      this.deleteHasOccured = true;
   }
 
   // Checks for a draw
@@ -163,6 +263,18 @@ export class GamePage {
 
   }
 
+
+  alertHasDeleted()
+  {
+    let alert = this.alertCtrl.create({
+      title: "Can't delete",
+      subTitle: "You can only redo one turn",
+      buttons: [{
+        text: 'OK'
+      }]
+    });
+    alert.present();
+  }
   alertAtWin()
   {
     let alert = this.alertCtrl.create({
