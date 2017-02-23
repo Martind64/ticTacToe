@@ -12,17 +12,23 @@ import { Player } from '../../models/Player';
 export class GamePage {
 
 	constructor(public navCtrl: NavController, public alertCtrl: AlertController, public navParams: NavParams) {
-      console.log(this.navParams.get('player1Icon'));
   			}
 
+  // Get player information from navParams
   public player1Name = this.navParams.get('player1');
   public player2Name = this.navParams.get('player2');
   public player1Icon = this.navParams.get('player1Icon');
   public player2Icon = this.navParams.get('player2Icon');
 
+
+  // Create new Player Objects
   public player1 = new Player(this.player1Name, this.player1Icon);
   public player2 = new Player(this.player2Name, this.player2Icon);
+
+  // Create new Board object
   public board = new Board();
+
+  // Variables for the game
   public winner:string;
   public playerTurn = true;
 
@@ -49,7 +55,6 @@ export class GamePage {
   	}
     this.checkWin();
     this.checkForDraw();
-    console.log(this.turnsTaken);
     this.turnsTaken++;
   }
 
@@ -165,11 +170,6 @@ export class GamePage {
       ]
     });
     alert.present();
-  }
-
-  newNames()
-  {
-    this.navCtrl.setRoot(HomePage);
   }
 
   clearGame()
