@@ -33,7 +33,7 @@ export class GamePage {
   private player2Turn = false;
   private deleteHasOccured = false;
 
-  // To dertimine at what turn a sign was put down
+  // To dertermine at what turn a sign was put down
   private pos:{ pos:string }[] = [];
 
   //Used for determining a draw
@@ -42,12 +42,11 @@ export class GamePage {
 
   setPiece(x:number, y:number)
   {
-    if(this.board.board[x][y] != "")
+    if(this.board.board[x][y] != "" || this.winner!= null)
     {
       return;
     }
     this.setPosToTurn(x, y);
-    console.log(this.pos['pos0']);
 
     if(this.playerTurn == this.player1Turn) {
   		this.board.board[x][y] = this.player1.sign;
@@ -273,7 +272,7 @@ export class GamePage {
         text: 'OK'
       }]
     });
-    alert.present();
+    alert.present()
   }
   alertAtWin()
   {
