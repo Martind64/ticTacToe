@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
 // Import models
 import { Board } from '../../models/Board';
 import { Player } from '../../models/Player';
@@ -17,13 +16,13 @@ export class GamePage {
   // Get player information from navParams
   private player1Name = this.navParams.get('player1');
   private player2Name = this.navParams.get('player2');
-  private player1Icon = this.navParams.get('player1Icon');
-  private player2Icon = this.navParams.get('player2Icon');
+  private player1Sign = this.navParams.get('player1Sign');
+  private player2Sign = this.navParams.get('player2Sign');
 
 
   // Create new Player Objects
-  private player1 = new Player(this.player1Name, this.player1Icon);
-  private player2 = new Player(this.player2Name, this.player2Icon);
+  private player1 = new Player(this.player1Name, this.player1Sign);
+  private player2 = new Player(this.player2Name, this.player2Sign);
 
   // Create new Board object
   private board = new Board();
@@ -31,6 +30,8 @@ export class GamePage {
   // Variables for the game
   private winner:string;
   private playerTurn = true;
+  private player1Turn = true;
+  private player2Turn = false;
 
   //Used for determining a draw
   private numOfTurns = 9;
@@ -44,21 +45,35 @@ export class GamePage {
       return;
     }
     
-    if(this.playerTurn == true) {
+    if(this.playerTurn == this.player1Turn) {
   		this.board.board[x][y] = this.player1.sign;
-  		this.playerTurn = false;
+  		this.playerTurn = this.player2Turn;
   	}
   	else
   	{
   		this.board.board[x][y] = this.player2.sign;
-  		this.playerTurn = true;
+  		this.playerTurn = this.player1Turn;
   	}
     this.checkWin();
 
     this.turnsTaken++;
     this.checkForDraw();
-    console.log(this.turnsTaken);
+  }
 
+  movePiece(x:number, y:number)
+  {
+    if(this.board.board[x][y] != "") {
+
+      if(this.board.board[x][y] == this.player1Sign) {
+        this.playerTurn = this.player1Turn;
+      }
+      else{
+        this.playerTurn = this.player2Turn;
+      }
+      this.board.board[x][y] = "";
+
+      this.turnsTaken -=1;
+    }
   }
 
   // Checks for a draw

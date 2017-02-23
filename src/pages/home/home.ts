@@ -10,27 +10,27 @@ export class HomePage {
 
     constructor(public navCtrl: NavController)
     {
-      this.players.player1Icon = "X";
-      this.players.player2Icon = "O";
+      this.players.player1Sign = "X";
+      this.players.player2Sign = "O";
     }  
 
     players:any = {};
 
-    changeIcon()
+    changeSign()
     {
-      if(this.players.player1Icon == "X") {
-        this.players.player1Icon = "O";
+      if(this.players.player1Sign == "X") {
+        this.players.player1Sign = "O";
       }
       else{
-        (this.players.player1icon == "O") 
-        this.players.player1Icon = "X";
+        (this.players.player1Sign == "O") 
+        this.players.player1Sign = "X";
       }
 
-      if(this.players.player2Icon == "O") {
-        this.players.player2Icon = "X";
+      if(this.players.player2Sign == "O") {
+        this.players.player2Sign = "X";
       }
       else{
-        this.players.player2Icon = "O";
+        this.players.player2Sign = "O";
       }
     }
 
