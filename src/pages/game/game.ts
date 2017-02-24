@@ -11,6 +11,8 @@ import { Player } from '../../models/Player';
 export class GamePage {
 
 	constructor(public navCtrl: NavController, public alertCtrl: AlertController, public navParams: NavParams) {
+
+
   			}
 
   // Get player information from navParams
@@ -32,6 +34,9 @@ export class GamePage {
   private player1Turn = true;
   private player2Turn = false;
   private deleteHasOccured = false;
+
+  // Array with possitions of array
+  private winnerArray:string[][] = [['','',''],['','',''],['','','']];
 
   // To dertermine at what turn a sign was put down
   private pos:{ pos:string }[] = [];
@@ -62,6 +67,7 @@ export class GamePage {
     this.checkWin();
     this.turnsTaken++;
     this.checkForDraw();
+
   }
 
   setPosToTurn(x:number, y:number)
@@ -189,6 +195,7 @@ export class GamePage {
       if(this.board.board[0][0] == this.board.board[0][1]) {
         if(this.board.board[0][1] == this.board.board[0][2]) {
           this.board.board[0][0] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
+          this.setWinnerArray('0','0','0','1','0','2');
           this.alertAtWin();
         }
       }
@@ -198,6 +205,7 @@ export class GamePage {
       if(this.board.board[1][0] == this.board.board[1][1]) {
         if(this.board.board[1][1] == this.board.board[1][2]) {
           this.board.board[1][0] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
+          this.setWinnerArray('1','0','1','1','1','2');
           this.alertAtWin();
         }
       }
@@ -207,6 +215,7 @@ export class GamePage {
       if(this.board.board[2][0] == this.board.board[2][1]) {
         if(this.board.board[2][1] == this.board.board[2][2]) {
           this.board.board[2][0] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
+          this.setWinnerArray('2','0','2','1','2','2');
           this.alertAtWin();
         }
       }
@@ -216,8 +225,9 @@ export class GamePage {
     if(this.board.board[0][0] == this.player1.sign || this.board.board[0][0] == this.player2.sign) {
       if(this.board.board[0][0] == this.board.board[1][0]) {
         if(this.board.board[1][0] == this.board.board[2][0]) {
-          this.board.board[0][0] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
-          this.alertAtWin();          
+          this.board.board[0][0] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name
+          this.setWinnerArray('0','0','1','0','2','0');
+          this.alertAtWin();
       }
     }
   }
@@ -227,6 +237,7 @@ export class GamePage {
       if(this.board.board[0][1] == this.board.board[1][1]) {
         if(this.board.board[1][1] == this.board.board[2][1]) {
           this.board.board[0][1] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
+          this.setWinnerArray('0','1','1','1','2','1');
           this.alertAtWin();                    
       }
     }
@@ -237,6 +248,7 @@ export class GamePage {
       if(this.board.board[0][2] == this.board.board[1][2]) {
         if(this.board.board[1][2] == this.board.board[2][2]) {
           this.board.board[0][2] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
+          this.setWinnerArray('0','2','1','2','2','2');
           this.alertAtWin();
       }
     }
@@ -247,6 +259,7 @@ export class GamePage {
       if(this.board.board[0][0] == this.board.board[1][1]) {
         if(this.board.board[1][1] == this.board.board[2][2]) {
           this.board.board[0][0] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
+          this.setWinnerArray('0','0','1','1','2','2');
           this.alertAtWin();          
       }
     }
@@ -255,6 +268,7 @@ export class GamePage {
       if(this.board.board[0][2] == this.board.board[1][1]) {
         if(this.board.board[1][1] == this.board.board[2][0]) {
           this.board.board[0][2] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
+          this.setWinnerArray('0','2','1','1','2','0');
           this.alertAtWin();
       }
     }
@@ -262,6 +276,12 @@ export class GamePage {
 
   }
 
+  setWinnerArray(a:string, b:string, c:string, d:string, e:string, f:string)
+  { 
+    this.winnerArray[a][b] = 'Winning spot!';
+    this.winnerArray[c][d] = 'Winning spot!';
+    this.winnerArray[e][f] = 'Winning spot!';
+  }
 
   alertHasDeleted()
   {
@@ -284,7 +304,6 @@ export class GamePage {
       }
       ]
     });
-
     alert.present();
   }
 
@@ -304,9 +323,11 @@ export class GamePage {
   clearGame()
   {
      this.board.board = [['', '', ''], ['', '', ''], ['', '', '']];
+     this.winnerArray = [['', '', ''], ['', '', ''], ['', '', '']];
      this.playerTurn = true;
      this.winner = null;
      this.turnsTaken = 0;
+     
   }
 
 }
