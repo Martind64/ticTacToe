@@ -8,7 +8,7 @@ page-game {
 	    color: #38678F;
 	}
 
-	.names{
+	.icons{
 		text-align: center;
 	}
 
@@ -19,20 +19,17 @@ page-game {
 
 	.playerSign{
 		display:inline;
+		margin-right: 10%;
 	}
-	.winnerNames{
+	.winnerNames ion-col{
+		text-align: center;
 		margin-top: -8%;
+
 	}
 
-	.player2Icon{
-		margin-left: 30%;
-	}
+	.playerScore{
+		margin-top: -10%;
+		text-align: center;
 
-	.player1Score{
-		margin-top: -6%;
-	}
-	.player2Score{
-		margin-top: -6%;
-		margin-left: 29%;
 	}
 }

@@ -54,7 +54,7 @@ export class GamePage {
 
   setPiece(x:number, y:number)
   {
-    // Skip the rest of the function if either a winner has been determined and a gamemode has finished
+    // Skip the rest of the function if either a winner has been determined
     // or the spot has already been taken
     if(this.board.board[x][y] != "" || this.winner != null)
     {

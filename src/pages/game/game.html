@@ -13,8 +13,8 @@
 </ion-header>
 
 <ion-content padding>
-<ion-grid class="board">
-	<ion-row>
+<ion-grid>
+	<ion-row class="board"> 
 		<ion-col width-33 (press)="movePiece(0,0,0)" (tap)="setPiece(0,0)">
 			<p ion text class="playerSign" [color]="winnerPosColor[0][0] ? 'secondary' : ''">{{board.board[0][0]}}</p>
 		</ion-col>
@@ -25,7 +25,7 @@
 			<p ion text class="playerSign" [color]="winnerPosColor[0][2] ? 'secondary' : ''"> {{board.board[0][2]}}</p>
 		</ion-col>
 	</ion-row>
-	<ion-row>
+	<ion-row class="board">
 		<ion-col width-33 (press)="movePiece(1,0,3)" (tap)="setPiece(1,0)">
 			<p ion text class="playerSign" [color]="winnerPosColor[1][0] ? 'secondary' : ''"> {{board.board[1][0]}}</p>
 		</ion-col>
@@ -36,7 +36,7 @@
 			<p ion text class="playerSign" [color]="winnerPosColor[1][2] ? 'secondary' : ''"> {{board.board[1][2]}}</p>
 		</ion-col>
 	</ion-row>
-	<ion-row>
+	<ion-row class="board">
 		<ion-col width-33 (press)="movePiece(2,0,6)" (tap)="setPiece(2,0)">
 			<p ion text class="playerSign" [color]="winnerPosColor[2][0] ? 'secondary' : ''">{{board.board[2][0]}}</p>
 		</ion-col>
@@ -49,33 +49,35 @@
 	</ion-row>
 </ion-grid>
 
-<ion-grid class="names">
-	<ion-row>
-		<ion-col width-50>
+	<ion-row class="icons">
+		<ion-col width-40>
 			<ion-icon name="{{player1Icon}}"></ion-icon>
 		</ion-col>
-		<ion-col width-50>
+		<ion-col width-20></ion-col>
+		<ion-col width-40>
 			<ion-icon  class="player2Icon" name="{{player2Icon}}"></ion-icon>
 		</ion-col>
 	</ion-row>
 	<ion-row class="winnerNames">
-		<ion-col width-50>
+		<ion-col width-40>
 			<p ion-text [color]="playerTurn ? 'secondary' : ''">{{player1?.name}}</p>
 		</ion-col>
-		<p class="vs">VS</p>
-		<ion-col width-50 >
+		<ion-col width-20>
+			<p class="vs">VS</p>
+		</ion-col>
+		<ion-col width-40 >
 			<p ion-text [color]="playerTurn ? '' : 'secondary'">{{player2?.name}}</p>
 		</ion-col>
 	</ion-row>
-	<ion-row> 
-		<ion-col width-50>
-			<p class="player1Score" ion-text>{{player1.score}}</p>
+	<ion-row class="playerScore"> 
+		<ion-col width-40>
+			<p ion-text>{{player1.score}}</p>
 		</ion-col>
-		<ion-col width-50>
-			<p class="player2Score" ion-text>{{player2.score}}</p>
+		<ion-col width-20></ion-col>
+		<ion-col width-40>
+			<p ion-text>{{player2.score}}</p>
 		</ion-col>
 	</ion-row>
-</ion-grid>
 
 
 <ion-row>
