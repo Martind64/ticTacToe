@@ -48,15 +48,18 @@ export class GamePage {
   private pos:{ pos:string }[] = [];
 
   //Used for determining a draw
-  private numOfTurns = 9;
+  private maxNoOfTurns = 9;
   private turnsTaken = 0;
 
   setPiece(x:number, y:number)
   {
+    // Skip the rest of the function if either a winner has been determined
+    // or the spot has already been taken
     if(this.board.board[x][y] != "" || this.winner!= null)
     {
       return;
     }
+
     this.setPosToTurn(x, y);
 
     if(this.playerTurn == this.player1Turn) {
@@ -76,34 +79,37 @@ export class GamePage {
 
   }
 
+  // Set the currently clicked block to the amount of turns taken +1.
+  // +1 is because when a move has been made this.turnstaken is incremented by one
+  // used to determine at what turn a character/sign was put down
   setPosToTurn(x:number, y:number)
   {
     if(x == 0 && y == 0) {
-      this.pos['pos0'] = this.turnsTaken;
+      this.pos['pos0'] = this.turnsTaken +1;
     }
     else if(x == 0 && y == 1){
-      this.pos['pos1'] = this.turnsTaken;
+      this.pos['pos1'] = this.turnsTaken +1;
     }
     else if(x == 0 && y == 2){
-      this.pos['pos2'] = this.turnsTaken;
+      this.pos['pos2'] = this.turnsTaken +1;
     }
     else if(x == 1 && y == 0){
-      this.pos['pos3'] = this.turnsTaken;
+      this.pos['pos3'] = this.turnsTaken +1;
     }
     else if(x == 1 && y == 1){
-      this.pos['pos4'] = this.turnsTaken;
+      this.pos['pos4'] = this.turnsTaken +1;
     }
     else if(x == 1 && y == 2){
-      this.pos['pos5'] = this.turnsTaken;
+      this.pos['pos5'] = this.turnsTaken +1;
     }
     else if(x == 2 && y == 0){
-      this.pos['pos6'] = this.turnsTaken;
+      this.pos['pos6'] = this.turnsTaken +1;
     }
     else if(x == 2 && y == 1){
-       this.pos['pos7'] = this.turnsTaken;
+       this.pos['pos7'] = this.turnsTaken +1;
     }
     else if(x == 2 && y == 2){
-      this.pos['pos8'] = this.turnsTaken;
+      this.pos['pos8'] = this.turnsTaken +1;
     }
   }
 
@@ -113,56 +119,57 @@ export class GamePage {
     if(this.board.board[x][y] == "") {
       return;
     }
-    // If a delete already has been done show d and end function
+    // If a delete already has been done show alert and end function
     if(this.deleteHasOccured == true) {
       this.alertHasDeleted();
       return;
     }
 
-    var turnsTaken = this.turnsTaken -1;
+    // Checks if the position that is trying to be deleted 
+    // actually was put down this turn
     switch (posNo) {
       case 0:
-        if(this.pos['pos0'] == turnsTaken) {
+        if(this.pos['pos0'] == this.turnsTaken) {
           this.deletePiece(x, y);
         }
       break;
       case 1:
-        if(this.pos['pos1'] == turnsTaken) {
+        if(this.pos['pos1'] == this.turnsTaken) {
           this.deletePiece(x, y);            
           }  
       break;
       case 2:
-        if(this.pos['pos2'] == turnsTaken) {
+        if(this.pos['pos2'] == this.turnsTaken) {
           this.deletePiece(x, y);            
          } 
       break;
       case 3:
-        if(this.pos['pos3'] == turnsTaken) {
+        if(this.pos['pos3'] == this.turnsTaken) {
           this.deletePiece(x, y);
         }
       break;
       case 4:
-        if(this.pos['pos4'] == turnsTaken) {
+        if(this.pos['pos4'] == this.turnsTaken) {
           this.deletePiece(x, y);
         }
       break;
       case 5:
-        if(this.pos['pos5'] == turnsTaken) {
+        if(this.pos['pos5'] == this.turnsTaken) {
           this.deletePiece(x, y);
         }
       break;
       case 6:
-        if(this.pos['pos6'] == turnsTaken) {
+        if(this.pos['pos6'] == this.turnsTaken) {
           this.deletePiece(x, y);
         }
       break;
       case 7:
-        if(this.pos['pos7'] == turnsTaken) {
+        if(this.pos['pos7'] == this.turnsTaken) {
           this.deletePiece(x, y);
         }
       break;
       case 8:
-        if(this.pos['pos8'] == turnsTaken) {
+        if(this.pos['pos8'] == this.turnsTaken) {
           this.deletePiece(x, y);
         }
       break;
@@ -190,7 +197,7 @@ export class GamePage {
   // Checks for a draw
   checkForDraw()
   {
-    if(this.turnsTaken == this.numOfTurns && this.winner == null) {
+    if(this.turnsTaken == this.maxNoOfTurns && this.winner == null) {
       this.alertAtDraw();
     }
   }
@@ -303,6 +310,7 @@ export class GamePage {
   setWinner()
   {
       this.winner ==  this.player1.name ? this.player1Icon = "trophy" : this.player2Icon = "trophy";
+      this.winner == this.player1Name ? this.playerTurn = this.player1Turn: this.playerTurn = this.player2Turn;
   }
 
   alertAtDraw()
