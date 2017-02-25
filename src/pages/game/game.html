@@ -67,7 +67,16 @@
 			<p ion-text [color]="playerTurn ? '' : 'secondary'">{{player2?.name}}</p>
 		</ion-col>
 	</ion-row>
+	<ion-row> 
+		<ion-col width-50>
+			<p class="player1Score" ion-text>{{player1.score}}</p>
+		</ion-col>
+		<ion-col width-50>
+			<p class="player2Score" ion-text>{{player2.score}}</p>
+		</ion-col>
+	</ion-row>
 </ion-grid>
+
 
 <ion-row>
 	<ion-col width-50>

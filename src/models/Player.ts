@@ -2,6 +2,7 @@ export class Player{
 
 	name:string;
 	sign:string;
+	score:number = 0;
 
 	constructor(Name:string, Sign:string)
 	{
@@ -12,6 +13,11 @@ export class Player{
 	setPlayerName(Name:string)
 	{
 		this.name = Name;
+	}
+
+	setScore(increment:number)
+	{
+		this.score += increment;
 	}
 
 }

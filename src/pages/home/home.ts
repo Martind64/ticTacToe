@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController} from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, Slides} from 'ionic-angular';
 import { GamePage } from '../game/game';
 
 @Component({
@@ -10,38 +10,43 @@ export class HomePage {
 
     constructor(public navCtrl: NavController)
     {
-      this.players.player1Sign = "X";
-      this.players.player2Sign = "O";
-    }  
+      this.game.player1Sign = "X";
+      this.game.player2Sign = "O";
+    }
+ 
+    @ViewChild(Slides) slides: Slides;
 
-    players:any = {};
+    game:any = {};
 
     changeSign()
     {
-      if(this.players.player1Sign == "X") {
-        this.players.player1Sign = "O";
+      if(this.game.player1Sign == "X") {
+        this.game.player1Sign = "O";
       }
       else{
-        (this.players.player1Sign == "O") 
-        this.players.player1Sign = "X";
+        (this.game.player1Sign == "O") 
+        this.game.player1Sign = "X";
       }
 
-      if(this.players.player2Sign == "O") {
-        this.players.player2Sign = "X";
+      if(this.game.player2Sign == "O") {
+        this.game.player2Sign = "X";
       }
       else{
-        this.players.player2Sign = "O";
+        this.game.player2Sign = "O";
       }
     }
 
-
-    selectPlayers()
+    gameModeIndex()
     {
-      this.navCtrl.push(GamePage, this.players);
+      let currentIndex = this.slides.getActiveIndex();
+      return currentIndex;
     }
 
-
-
+    startGame()
+    {
+      this.game.gameMode = this.gameModeIndex();
+      this.navCtrl.push(GamePage, this.game);
+    }
 
 
 }

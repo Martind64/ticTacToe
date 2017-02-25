@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, NavParams } from 'ionic-angular';
+import { HomePage } from '../home/home';
 // Import models
 import { Board } from '../../models/Board';
 import { Player } from '../../models/Player';
@@ -11,21 +12,19 @@ import { Player } from '../../models/Player';
 export class GamePage {
 
 	constructor(public navCtrl: NavController, public alertCtrl: AlertController, public navParams: NavParams) {
-
-
   			}
+
 
   // Get player information from navParams
   private player1Name = this.navParams.get('player1');
   private player2Name = this.navParams.get('player2');
   private player1Sign = this.navParams.get('player1Sign');
   private player2Sign = this.navParams.get('player2Sign');
+  private gameMode = this.navParams.get('gameMode');
 
   // Create new Player Objects
   private player1 = new Player(this.player1Name, this.player1Sign);
   private player2 = new Player(this.player2Name, this.player2Sign);
-
-  player1Win:boolean;
 
   // Create new Board object
   private board = new Board();
@@ -36,6 +35,7 @@ export class GamePage {
   private player1Turn = true;
   private player2Turn = false;
   private deleteHasOccured = false;
+  public gameover:boolean;
 
   // Used for showing the winner
   private player1Icon:string;
@@ -51,11 +51,12 @@ export class GamePage {
   private maxNoOfTurns = 9;
   private turnsTaken = 0;
 
+
   setPiece(x:number, y:number)
   {
-    // Skip the rest of the function if either a winner has been determined
+    // Skip the rest of the function if either a winner has been determined and a gamemode has finished
     // or the spot has already been taken
-    if(this.board.board[x][y] != "" || this.winner!= null)
+    if(this.board.board[x][y] != "" || this.winner != null)
     {
       return;
     }
@@ -79,7 +80,6 @@ export class GamePage {
     if(this.winner == null) {
       this.playerTurn == this.player1Turn ? this.playerTurn = this.player2Turn : this.playerTurn = this.player1Turn;
     }
-
   }
 
   // Set the currently clicked block to the amount of turns taken +1.
@@ -118,8 +118,8 @@ export class GamePage {
 
   movePiece(x:number, y:number, posNo:number)
   {
-    // If the position is not filled end the function
-    if(this.board.board[x][y] == "") {
+    // If the position is not filled or a winner has been set end the function
+    if(this.board.board[x][y] == "" || this.winner != null) {
       return;
     }
     // If a delete already has been done show alert and end function
@@ -288,8 +288,14 @@ export class GamePage {
           this.setWinner();
       }
     }
+
   }
 
+    // Check whether or not a game with a best of three or best of 5 has finished
+    if(this.gameMode == 1 && this.player1.score == 2 || this.player2.score == 2 || this.gameMode == 2 && this.player1.score == 3 || this.player2.score == 3) {
+       this.gameover = true;
+       this.alertAtWin();
+    }
   }
 
   setWinnerPosColor(a:string, b:string, c:string, d:string, e:string, f:string)
@@ -302,6 +308,32 @@ export class GamePage {
   {
     // Set a trophy above the winner
     this.winner ==  this.player1.name ? this.player1Icon = "trophy" : this.player2Icon = "trophy";
+
+    // Increment the playerscore by one
+    this.winner == this.player1.name ? this.player1.setScore(1) : this.player2.setScore(1);
+  }
+
+  alertAtWin()
+  {
+    let alert = this.alertCtrl.create({
+      title:'Victory!',
+      subTitle: this.winner + ' Has won!',
+      buttons: [
+      {
+        text: "Don't play",
+        handler:() =>{
+          this.navCtrl.setRoot(HomePage);
+        }
+      },
+      {
+        text: 'Play again',
+        role: 'cancel',
+        handler:() =>{
+          this.clearGame();
+        }
+      }]
+    });
+    alert.present();
   }
 
   alertHasDeleted()
@@ -331,6 +363,11 @@ export class GamePage {
 
   clearGame()
   {
+    if(this.gameover == true) {
+      this.player1.score = 0;
+      this.player2.score = 0;
+      this.gameover = false;
+    }
      this.board.board = [['', '', ''], ['', '', ''], ['', '', '']];
      this.winnerPosColor = [['', '', ''], ['', '', ''], ['', '', '']];
      this.player1Icon = '';
@@ -338,7 +375,6 @@ export class GamePage {
      this.playerTurn = true;
      this.winner = null;
      this.turnsTaken = 0;
-     
   }
 
 }
