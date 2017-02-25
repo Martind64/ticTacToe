@@ -1,3 +1,2 @@
 singles,b03,b05
 score
-Don't change color on player when the winner has been set

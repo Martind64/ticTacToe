@@ -42,7 +42,7 @@ export class GamePage {
   private player2Icon:string;
 
   // Array with possitions of array
-  private winnerArray:string[][] = [['','',''],['','',''],['','','']];
+  private winnerPosColor:string[][] = [['','',''],['','',''],['','','']];
 
   // To dertermine at what turn a sign was put down
   private pos:{ pos:string }[] = [];
@@ -64,18 +64,21 @@ export class GamePage {
 
     if(this.playerTurn == this.player1Turn) {
   		this.board.board[x][y] = this.player1.sign;
-  		this.playerTurn = this.player2Turn;
   	}
   	else
   	{
   		this.board.board[x][y] = this.player2.sign;
-  		this.playerTurn = this.player1Turn;
   	}
 
     this.deleteHasOccured = false;
     this.checkWin();
     this.turnsTaken++;
     this.checkForDraw();
+
+    // Change turns unless a winner has been set
+    if(this.winner == null) {
+      this.playerTurn == this.player1Turn ? this.playerTurn = this.player2Turn : this.playerTurn = this.player1Turn;
+    }
 
   }
 
@@ -208,7 +211,7 @@ export class GamePage {
       if(this.board.board[0][0] == this.board.board[0][1]) {
         if(this.board.board[0][1] == this.board.board[0][2]) {
           this.board.board[0][0] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
-          this.setWinnerArray('0','0','0','1','0','2');
+          this.setWinnerPosColor('0','0','0','1','0','2');
           this.setWinner();
         }
       }
@@ -218,7 +221,7 @@ export class GamePage {
       if(this.board.board[1][0] == this.board.board[1][1]) {
         if(this.board.board[1][1] == this.board.board[1][2]) {
           this.board.board[1][0] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
-          this.setWinnerArray('1','0','1','1','1','2');
+          this.setWinnerPosColor('1','0','1','1','1','2');
           this.setWinner();
         }
       }
@@ -228,7 +231,7 @@ export class GamePage {
       if(this.board.board[2][0] == this.board.board[2][1]) {
         if(this.board.board[2][1] == this.board.board[2][2]) {
           this.board.board[2][0] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
-          this.setWinnerArray('2','0','2','1','2','2');
+          this.setWinnerPosColor('2','0','2','1','2','2');
           this.setWinner();
         }
       }
@@ -239,7 +242,7 @@ export class GamePage {
       if(this.board.board[0][0] == this.board.board[1][0]) {
         if(this.board.board[1][0] == this.board.board[2][0]) {
           this.board.board[0][0] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name
-          this.setWinnerArray('0','0','1','0','2','0');
+          this.setWinnerPosColor('0','0','1','0','2','0');
           this.setWinner();
       }
     }
@@ -250,7 +253,7 @@ export class GamePage {
       if(this.board.board[0][1] == this.board.board[1][1]) {
         if(this.board.board[1][1] == this.board.board[2][1]) {
           this.board.board[0][1] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
-          this.setWinnerArray('0','1','1','1','2','1');
+          this.setWinnerPosColor('0','1','1','1','2','1');
           this.setWinner();                    
       }
     }
@@ -261,7 +264,7 @@ export class GamePage {
       if(this.board.board[0][2] == this.board.board[1][2]) {
         if(this.board.board[1][2] == this.board.board[2][2]) {
           this.board.board[0][2] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
-          this.setWinnerArray('0','2','1','2','2','2');
+          this.setWinnerPosColor('0','2','1','2','2','2');
           this.setWinner();
       }
     }
@@ -272,7 +275,7 @@ export class GamePage {
       if(this.board.board[0][0] == this.board.board[1][1]) {
         if(this.board.board[1][1] == this.board.board[2][2]) {
           this.board.board[0][0] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
-          this.setWinnerArray('0','0','1','1','2','2');
+          this.setWinnerPosColor('0','0','1','1','2','2');
           this.setWinner();          
       }
     }
@@ -281,7 +284,7 @@ export class GamePage {
       if(this.board.board[0][2] == this.board.board[1][1]) {
         if(this.board.board[1][1] == this.board.board[2][0]) {
           this.board.board[0][2] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
-          this.setWinnerArray('0','2','1','1','2','0');
+          this.setWinnerPosColor('0','2','1','1','2','0');
           this.setWinner();
       }
     }
@@ -289,11 +292,16 @@ export class GamePage {
 
   }
 
-  setWinnerArray(a:string, b:string, c:string, d:string, e:string, f:string)
+  setWinnerPosColor(a:string, b:string, c:string, d:string, e:string, f:string)
   { 
-    this.winnerArray[a][b] = 'Winning spot!';
-    this.winnerArray[c][d] = 'Winning spot!';
-    this.winnerArray[e][f] = 'Winning spot!';
+    this.winnerPosColor[a][b] = 'Winning spot!';
+    this.winnerPosColor[c][d] = 'Winning spot!';
+    this.winnerPosColor[e][f] = 'Winning spot!';
+  }
+  setWinner()
+  {
+    // Set a trophy above the winner
+    this.winner ==  this.player1.name ? this.player1Icon = "trophy" : this.player2Icon = "trophy";
   }
 
   alertHasDeleted()
@@ -306,11 +314,6 @@ export class GamePage {
       }]
     });
     alert.present()
-  }
-  setWinner()
-  {
-      this.winner ==  this.player1.name ? this.player1Icon = "trophy" : this.player2Icon = "trophy";
-      this.winner == this.player1Name ? this.playerTurn = this.player1Turn: this.playerTurn = this.player2Turn;
   }
 
   alertAtDraw()
@@ -329,7 +332,7 @@ export class GamePage {
   clearGame()
   {
      this.board.board = [['', '', ''], ['', '', ''], ['', '', '']];
-     this.winnerArray = [['', '', ''], ['', '', ''], ['', '', '']];
+     this.winnerPosColor = [['', '', ''], ['', '', ''], ['', '', '']];
      this.player1Icon = '';
      this.player2Icon = '';
      this.playerTurn = true;
