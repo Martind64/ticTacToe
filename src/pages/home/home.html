@@ -20,19 +20,19 @@
 </ion-list>
 
 <ion-grid>
-	<ion-row>
+	<ion-row class="players" >
 		<ion-col width-50>Player 1</ion-col>
 		<ion-col width-50>Player 2</ion-col>
 	</ion-row>
-	<ion-row>
+	<ion-row class="playerSign">
 		<ion-col width-40>
-			<p class="playerSign">{{game.player1Sign}}</p>
+			<p >{{game.player1Sign}}</p>
 		</ion-col>
 		<ion-col width-10>
 			<ion-icon name="swap" (click)="changeSign()"></ion-icon>
 		</ion-col>
 		<ion-col width-40>
-			<p class="playerSign">{{game.player2Sign}}</p>
+			<p>{{game.player2Sign}}</p>
 		</ion-col>
 	</ion-row>
 	<br>
@@ -52,6 +52,6 @@
 		</ion-col>
 	</ion-row>
 </ion-grid>
-<button class="hej" ion-button block type="submit" (click)="startGame()">Play</button>
+<button ion-button block type="submit" (click)="startGame()">Play</button>
 
 </ion-content>

@@ -317,7 +317,7 @@ export class GamePage {
   {
     let alert = this.alertCtrl.create({
       title:'Victory!',
-      subTitle: this.winner + ' Has won!',
+      subTitle: this.winner + ' has won!',
       buttons: [
       {
         text: "Don't play",
