@@ -1,9 +1,19 @@
 page-home {
 
+	ion-col{
+		// border: 2px solid black;
+	}
 	.players{
 		text-align: center;
 	}
 	.playerSign{
 		text-align: center;
+		height: 30px;
+	}
+	.slider{
+		height: 80px;
+	}
+	.slider-text{
+		top: -25%;
 	}
 }

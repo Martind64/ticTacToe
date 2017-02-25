@@ -36,10 +36,10 @@
 		</ion-col>
 	</ion-row>
 	<br>
-	<ion-row>
+	<ion-row class="slider">
 		<ion-col width-100>
-			<ion-slides (ionSlideDidChange)="gameModeIndex()">
-			  <ion-slide>
+			<ion-slides (ionSlideDidChange)="gameModeIndex()" pager>
+			  <ion-slide  class="slider-text" >
 			    <h2>Single Match</h2>
 			  </ion-slide>
 			  <ion-slide>
