@@ -17,12 +17,14 @@
 		<ion-label floating>Player 2</ion-label>
 		<ion-input type="text" [(ngModel)]="game.player2"></ion-input>
 	</ion-item>
+	<ion-item hidden></ion-item>
 </ion-list>
 
 <ion-grid>
 	<ion-row class="players" >
-		<ion-col width-50>Player 1</ion-col>
-		<ion-col width-50>Player 2</ion-col>
+		<ion-col width-40>Player 1</ion-col>
+		<ion-col width-20></ion-col>
+		<ion-col width-40>Player 2</ion-col>
 	</ion-row>
 	<ion-row class="playerSign">
 		<ion-col width-40>
