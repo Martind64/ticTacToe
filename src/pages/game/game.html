@@ -52,6 +52,14 @@
 <ion-grid class="names">
 	<ion-row>
 		<ion-col width-50>
+			<ion-icon name="{{player1Icon}}"></ion-icon>
+		</ion-col>
+		<ion-col width-50>
+			<ion-icon  class="player2Icon" name="{{player2Icon}}"></ion-icon>
+		</ion-col>
+	</ion-row>
+	<ion-row class="winnerNames">
+		<ion-col width-50>
 			<p ion-text [color]="playerTurn ? 'secondary' : ''">{{player1?.name}}</p>
 		</ion-col>
 		<p class="vs">VS</p>

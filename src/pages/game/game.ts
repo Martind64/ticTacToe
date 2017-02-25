@@ -25,6 +25,8 @@ export class GamePage {
   private player1 = new Player(this.player1Name, this.player1Sign);
   private player2 = new Player(this.player2Name, this.player2Sign);
 
+  player1Win:boolean;
+
   // Create new Board object
   private board = new Board();
 
@@ -34,6 +36,10 @@ export class GamePage {
   private player1Turn = true;
   private player2Turn = false;
   private deleteHasOccured = false;
+
+  // Used for showing the winner
+  private player1Icon:string;
+  private player2Icon:string;
 
   // Array with possitions of array
   private winnerArray:string[][] = [['','',''],['','',''],['','','']];
@@ -196,7 +202,7 @@ export class GamePage {
         if(this.board.board[0][1] == this.board.board[0][2]) {
           this.board.board[0][0] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
           this.setWinnerArray('0','0','0','1','0','2');
-          this.alertAtWin();
+          this.setWinner();
         }
       }
     }
@@ -206,7 +212,7 @@ export class GamePage {
         if(this.board.board[1][1] == this.board.board[1][2]) {
           this.board.board[1][0] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
           this.setWinnerArray('1','0','1','1','1','2');
-          this.alertAtWin();
+          this.setWinner();
         }
       }
     }
@@ -216,7 +222,7 @@ export class GamePage {
         if(this.board.board[2][1] == this.board.board[2][2]) {
           this.board.board[2][0] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
           this.setWinnerArray('2','0','2','1','2','2');
-          this.alertAtWin();
+          this.setWinner();
         }
       }
     }
@@ -227,7 +233,7 @@ export class GamePage {
         if(this.board.board[1][0] == this.board.board[2][0]) {
           this.board.board[0][0] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name
           this.setWinnerArray('0','0','1','0','2','0');
-          this.alertAtWin();
+          this.setWinner();
       }
     }
   }
@@ -238,7 +244,7 @@ export class GamePage {
         if(this.board.board[1][1] == this.board.board[2][1]) {
           this.board.board[0][1] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
           this.setWinnerArray('0','1','1','1','2','1');
-          this.alertAtWin();                    
+          this.setWinner();                    
       }
     }
   }
@@ -249,7 +255,7 @@ export class GamePage {
         if(this.board.board[1][2] == this.board.board[2][2]) {
           this.board.board[0][2] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
           this.setWinnerArray('0','2','1','2','2','2');
-          this.alertAtWin();
+          this.setWinner();
       }
     }
   }
@@ -260,7 +266,7 @@ export class GamePage {
         if(this.board.board[1][1] == this.board.board[2][2]) {
           this.board.board[0][0] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
           this.setWinnerArray('0','0','1','1','2','2');
-          this.alertAtWin();          
+          this.setWinner();          
       }
     }
   }
@@ -269,7 +275,7 @@ export class GamePage {
         if(this.board.board[1][1] == this.board.board[2][0]) {
           this.board.board[0][2] == this.player1.sign ? this.winner = this.player1.name : this.winner = this.player2.name;
           this.setWinnerArray('0','2','1','1','2','0');
-          this.alertAtWin();
+          this.setWinner();
       }
     }
   }
@@ -294,17 +300,9 @@ export class GamePage {
     });
     alert.present()
   }
-  alertAtWin()
+  setWinner()
   {
-    let alert = this.alertCtrl.create({
-      title: "Game over",
-      subTitle: "The winner is " + this.winner,
-      buttons: [{
-        text: 'OK'
-      }
-      ]
-    });
-    alert.present();
+      this.winner ==  this.player1.name ? this.player1Icon = "trophy" : this.player2Icon = "trophy";
   }
 
   alertAtDraw()
@@ -324,6 +322,8 @@ export class GamePage {
   {
      this.board.board = [['', '', ''], ['', '', ''], ['', '', '']];
      this.winnerArray = [['', '', ''], ['', '', ''], ['', '', '']];
+     this.player1Icon = '';
+     this.player2Icon = '';
      this.playerTurn = true;
      this.winner = null;
      this.turnsTaken = 0;
