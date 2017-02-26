@@ -292,7 +292,7 @@ export class GamePage {
   }
 
     // Check whether or not a game with a best of three or best of 5 has finished
-    if(this.gameMode == 1 && this.player1.score == 2 || this.player2.score == 2 || this.gameMode == 2 && this.player1.score == 3 || this.player2.score == 3) {
+    if(this.gameMode == 1 && this.player1.score == 2 || this.gameMode == 1 && this.player2.score == 2 || this.gameMode == 2 && this.player1.score == 3 || this.gameMode == 2 && this.player2.score == 3) {
        this.gameover = true;
        this.alertAtWin();
     }
