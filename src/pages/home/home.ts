@@ -24,7 +24,6 @@ export class HomePage {
         this.game.player1Sign = "O";
       }
       else{
-        (this.game.player1Sign == "O") 
         this.game.player1Sign = "X";
       }
 
