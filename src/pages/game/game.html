@@ -16,39 +16,38 @@
 <ion-grid>
 	<ion-row class="board"> 
 		<ion-col width-33 (press)="movePiece(0,0,0)" (tap)="setPiece(0,0)">
-			<p ion text class="playerSign" [color]="winnerPosColor[0][0] ? 'secondary' : ''">{{board.board[0][0]}}</p>
+			<p ion text class="playerSign" [color]="winnerPosColor[0][0] ? 'secondary' : ''"><img src="{{board.board[0][0] | sign}}"></p>
 		</ion-col>
 		<ion-col width-33 (press)="movePiece(0,1,1)" (tap)="setPiece(0,1)">
-			<p ion text class="playerSign" [color]="winnerPosColor[0][1] ? 'secondary' : ''"> {{board.board[0][1]}}</p>
+			<p ion text class="playerSign" [color]="winnerPosColor[0][1] ? 'secondary' : ''"><img src="{{board.board[0][1] | sign}}"></p>
 		</ion-col>
 		<ion-col width-33 (press)="movePiece(0,2,2)" (tap)="setPiece(0,2)">
-			<p ion text class="playerSign" [color]="winnerPosColor[0][2] ? 'secondary' : ''"> {{board.board[0][2]}}</p>
+			<p ion text class="playerSign" [color]="winnerPosColor[0][2] ? 'secondary' : ''"><img src="{{board.board[0][2] | sign}}"></p>
 		</ion-col>
 	</ion-row>
 	<ion-row class="board">
 		<ion-col width-33 (press)="movePiece(1,0,3)" (tap)="setPiece(1,0)">
-			<p ion text class="playerSign" [color]="winnerPosColor[1][0] ? 'secondary' : ''"> {{board.board[1][0]}}</p>
+			<p ion text class="playerSign" [color]="winnerPosColor[1][0] ? 'secondary' : ''"><img src="{{board.board[1][0] | sign}}"></p>
 		</ion-col>
 		<ion-col width-33 (press)="movePiece(1,1,4)" (tap)="setPiece(1,1)">
-			<p ion text class="playerSign" [color]="winnerPosColor[1][1] ? 'secondary' : ''"> {{board.board[1][1]}}</p>
+			<p ion text class="playerSign" [color]="winnerPosColor[1][1] ? 'secondary' : ''"><img src="{{board.board[1][1] | sign}}"></p>
 		</ion-col>
 		<ion-col width-33 (press)="movePiece(1,2,5)" (tap)="setPiece(1,2)">
-			<p ion text class="playerSign" [color]="winnerPosColor[1][2] ? 'secondary' : ''"> {{board.board[1][2]}}</p>
+			<p ion text class="playerSign" [color]="winnerPosColor[1][2] ? 'secondary' : ''"><img src="{{board.board[1][2] | sign}}"></p>
 		</ion-col>
 	</ion-row>
 	<ion-row class="board">
 		<ion-col width-33 (press)="movePiece(2,0,6)" (tap)="setPiece(2,0)">
-			<p ion text class="playerSign" [color]="winnerPosColor[2][0] ? 'secondary' : ''">{{board.board[2][0]}}</p>
+			<p ion text class="playerSign" [color]="winnerPosColor[2][0] ? 'secondary' : ''"><img src="{{board.board[2][0] | sign}}"></p>
 		</ion-col>
 		<ion-col width-33 (press)="movePiece(2,1,7)" (tap)="setPiece(2,1)">
-			<p ion text class="playerSign" [color]="winnerPosColor[2][1] ? 'secondary' : ''">{{board.board[2][1]}}</p>
+			<p ion text class="playerSign" [color]="winnerPosColor[2][1] ? 'secondary' : ''"><img src="{{board.board[2][1] | sign}}"></p>
 		</ion-col>
 		<ion-col width-33 (press)="movePiece(2,2,8)" (tap)="setPiece(2,2)">
-			<p ion text class="playerSign" [color]="winnerPosColor[2][2] ? 'secondary' : ''">{{board.board[2][2]}}</p>
+			<p ion text class="playerSign" [color]="winnerPosColor[2][2] ? 'secondary' : ''"><img src="{{board.board[2][2] | sign}}"></p>
 		</ion-col>
 	</ion-row>
 </ion-grid>
-
 	<ion-row class="icons">
 		<ion-col width-40>
 			<ion-icon name="{{player1Icon}}"></ion-icon>
@@ -60,13 +59,13 @@
 	</ion-row>
 	<ion-row class="winnerNames">
 		<ion-col width-40>
-			<p ion-text [color]="playerTurn ? 'secondary' : ''">{{player1?.name}}</p>
+			<p ion-text [color]="playerTurn ? 'secondary' : ''">{{player1?.name | uppercase}}</p>
 		</ion-col>
 		<ion-col width-20>
 			<p class="vs">VS</p>
 		</ion-col>
 		<ion-col width-40 >
-			<p ion-text [color]="playerTurn ? '' : 'secondary'">{{player2?.name}}</p>
+			<p ion-text [color]="playerTurn ? '' : 'secondary'">{{player2?.name | uppercase}}</p>
 		</ion-col>
 	</ion-row>
 	<ion-row class="playerScore"> 
