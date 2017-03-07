@@ -59,13 +59,13 @@
 	</ion-row>
 	<ion-row class="winnerNames">
 		<ion-col width-40>
-			<p ion-text [color]="playerTurn ? 'secondary' : ''">{{player1?.name | uppercase}}</p>
+			<p ion-text [color]="playerTurn ? 'secondary' : ''">{{player1?.name | ucname}}</p>
 		</ion-col>
 		<ion-col width-20>
 			<p class="vs">VS</p>
 		</ion-col>
 		<ion-col width-40 >
-			<p ion-text [color]="playerTurn ? '' : 'secondary'">{{player2?.name | uppercase}}</p>
+			<p ion-text [color]="playerTurn ? '' : 'secondary'">{{player2?.name | ucname}}</p>
 		</ion-col>
 	</ion-row>
 	<ion-row class="playerScore"> 
