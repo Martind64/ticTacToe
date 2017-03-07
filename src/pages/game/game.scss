@@ -1,11 +1,13 @@
 page-game {
 
+	$color: #38678f;
+
 	.board ion-col{
 		height: 100px;
 		text-align: center;
 		font-size: 75px;;
-	    border: 1px solid #38678f;
-	    color: #38678F;
+	    border: 1px solid $color;
+	    color: $color;
 	}
 
 	.icons{
@@ -33,6 +35,6 @@ page-game {
 	}
 
 	.clearBoard{
-		background: #38678F;
+		background: $color;
 	}
 }

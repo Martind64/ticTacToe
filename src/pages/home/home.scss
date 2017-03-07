@@ -1,13 +1,12 @@
 page-home {
 
-	ion-col{
-		// border: 2px solid black;
-	}
+	$textCenter: center;
+
 	.players{
-		text-align: center;
+		text-align: $textCenter;
 	}
 	.playerSign{
-		text-align: center;
+		text-align: $textCenter;
 		height: 30px;
 	}
 	.slider{
